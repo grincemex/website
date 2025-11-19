@@ -6,6 +6,20 @@
     <title>GRINCE - Grupo Industrial Centauros</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+            :root {
+                --color-1: #000;
+                --color-2: #B52121;
+                --color-3: #FFF4F2;
+                --color-4: #183449;
+                --color-5: #4DACCA;
+            }
+            /* Palette overrides */
+            .navbar.bg-primary { background-color: var(--color-4) !important; }
+            footer.bg-primary { background-color: var(--color-4) !important; }
+            .btn-primary { background-color: var(--color-2); border-color: var(--color-2); }
+            .btn-primary:hover, .btn-primary:focus { filter: brightness(.9); }
+            .btn-success { background-color: var(--color-5); border-color: var(--color-5); color: var(--color-1); }
+            .hero-caption { color: var(--color-3); }
         header {
             background: url('img/background.jpg');
             background-size: cover;
@@ -16,6 +30,26 @@
             color: white;
             text-shadow: 2px 2px 10px black;
         }
+        /* Contact & WhatsApp styles */
+        .contact-sheet .card { border: 0; }
+        .contact-sheet .form-control,
+        .contact-sheet .form-control:focus { box-shadow: none; border-color: #ced4da; }
+        .whatsapp-btn {
+            position: fixed; right: 20px; bottom: 20px; z-index:1100; text-decoration:none; padding:0; border:0;
+            display:flex; align-items:center; justify-content:center;
+        }
+        /* Simple version: just show the provided image */
+        .whatsapp-btn.simple { width:56px; height:56px; }
+        .whatsapp-btn.simple img { width:100%; height:100%; display:block; border-radius:50%; }
+        /* Legacy inner structure (kept for fallback) */
+        .whatsapp-inner { width:56px; height:56px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow: 0 6px 18px rgba(37,211,102,0.35); border:6px solid rgba(255,255,255,0.92); }
+        .whatsapp-btn svg { width:26px; height:26px; fill:#fff; display:block; }
+        .whatsapp-btn:focus { outline:none; box-shadow: 0 0 0 6px rgba(37,211,102,0.12); }
+        .whatsapp-btn:hover { transform: translateY(-2px) scale(1.02); }
+        @media (max-width:576px) { .whatsapp-btn { right:12px; bottom:12px; width:62px; height:62px; } .whatsapp-inner { width:48px; height:48px; border:5px solid rgba(255,255,255,0.92);} .whatsapp-btn svg { width:20px; height:20px; } }
+        /* Hero caption background */
+        .hero-caption { background: rgba(0,0,0,0.8); display: inline-block; padding: 1rem 1.25rem; border-radius: 4px; }
+        @media (max-width:767px) { .hero-caption { display: block; width: 100%; box-sizing: border-box; padding: 0.75rem 1rem; } }
     </style>
 </head>
 
@@ -23,8 +57,10 @@
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-        <a class="navbar-brand" href="#home">GRINCE</a>
+        <div class="container">
+        <a class="navbar-brand" href="#home">
+              <img src="img/logo.png" alt="GRINCE" style="height: 100px;" class="d-inline-block align-text-top">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -34,12 +70,11 @@
                 <li class="nav-item"><a class="nav-link" href="#home" data-es="Inicio" data-en="Home">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about" data-es="Quiénes Somos" data-en="About Us">Quiénes Somos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#products" data-es="Productos" data-en="Products">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
 
                 <!-- Language Selector -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="langMenu" data-bs-toggle="dropdown">
-                        ES/EN
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" id="langMenu" data-bs-toggle="dropdown">ES/EN</a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#" onclick="setLanguage('es')">Español</a></li>
                         <li><a class="dropdown-item" href="#" onclick="setLanguage('en')">English</a></li>
@@ -53,13 +88,15 @@
 <!-- HERO / HOME -->
 <header id="home">
     <div class="container">
-        <h1 class="display-4 fw-bold" data-es="Grupo Industrial Centauros" data-en="Grupo Industrial Centauros">
-            Grupo Industrial Centauros
-        </h1>
-        <p class="lead" data-es="Expertos en consumibles para soldadura"
-                          data-en="Experts in welding consumables">
-            Expertos en consumibles para soldadura
-        </p>
+        <div class="hero-caption text-center mx-auto">
+            <h1 class="display-4 fw-bold" data-es="Grupo Industrial Centauros" data-en="Grupo Industrial Centauros">
+                Grupo Industrial Centauros
+            </h1>
+            <p class="lead" data-es="Expertos en consumibles para soldadura"
+                              data-en="Experts in welding consumables">
+                Expertos en consumibles para soldadura
+            </p>
+        </div>
     </div>
 </header>
 
@@ -74,7 +111,30 @@
                    Somos una empresa especializada en la venta y desarrollo de consumibles para distintos procesos de soldadura, tanto manual como automática.
             </div>
             <div class="col-md-6 text-center">
-                <img src="img/logo.png" alt="Quienes Somos" class="img-fluid rounded" style="max-height:300px; object-fit:cover;">
+                <img src="img/soldador.jpg" alt="Quienes Somos" class="img-fluid rounded" style="max-height:300px; object-fit:cover;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BRANDS / PARTNERS -->
+<section id="brands" class="py-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 order-md-last">
+                <h3 class="fw-bold" style="letter-spacing:1px;"
+                    data-es="Proveedor de las principales marcas de consumibles del mercado"
+                    data-en="Supplier of the leading consumable brands in the market">
+                    Proveedor de las principales marcas de consumibles del mercado
+                </h3>
+            </div>
+            <div class="col-md-6 text-start order-md-first">
+                <div class="d-flex justify-content-start align-items-center">
+                        <img src="img/marcas.png" alt="Marcas"
+                             data-es-alt="Marcas"
+                             data-en-alt="Brands"
+                             class="img-fluid" style="max-height:300px; object-fit:cover; width:auto;">
+                </div>
             </div>
         </div>
     </div>
@@ -86,17 +146,20 @@
         <h2 class="mb-4" data-es="Productos y Servicios" data-en="Products & Services">Productos y Servicios</h2>
         <div class="row g-4">
 
-            <!-- Example Product -->
+            <!-- Product -->
             <div class="col-lg-4 col-md-6">
                 <div class="card">
-                    <img src="img/foto2.png" class="card-img-top" alt="Producto">
+                    <img src="img/antorchas.png" class="card-img-top" alt="Producto">
                     <div class="card-body">
-                        <h5 class="card-title" data-es="Soldadura Industrial"
-                                            data-en="Industrial Welding">Soldadura Industrial</h5>
-                        <p class="card-text" data-es="En proceso"
-                                            data-en="En proceso">
-                            En proceso
-                        </p>
+                        <h5 class="card-title" data-es="Equipos y refacciones para diferentes procesos de soldadura"
+                                            data-en="Equipment and spare parts for different welding processes">Equipos y refacciones para diferentes procesos de soldadura</h5>
+                            <ul class="mb-0">
+                                <li data-es="Estación de limpieza de boquillas robóticas" data-en="Robotic nozzle cleaning station">Estación de limpieza de boquillas robóticas</li>
+                                <li data-es="Antorchas robóticas MIG refrigeradas por aire" data-en="Air-cooled robotic MIG torches">Antorchas robóticas MIG refrigeradas por aire</li>
+                                <li data-es="Antorchas TIG y piezas de repuesto" data-en="TIG torches and spare parts">Antorchas TIG y piezas de repuesto</li>
+                                <li data-es="Enfriadores de agua" data-en="Water coolers">Enfriadores de agua</li>
+                                <li data-es="Pinzas de sujeción, lentes de gas, tapas traseras, boquillas, kits de soldadura y cables de alimentación" data-en="Clamping tongs, gas lenses, back caps, nozzles, welding kits and power cables">Pinzas de sujeción, lentes de gas, tapas traseras, boquillas, kits de soldadura y cables de alimentación</li>
+                            </ul>
                     </div>
                 </div>
             </div>
@@ -104,23 +167,85 @@
             <!-- Example Product -->
             <div class="col-lg-4 col-md-6">
                 <div class="card">
-                    <img src="img/foto3.png" class="card-img-top" alt="Fabricación">
+                    <img src="img/servicio.jpg" class="card-img-top" alt="Servicio">
                     <div class="card-body">
-                        <h5 class="card-title" data-es="Fabricación a Medida"
-                                            data-en="Custom Fabrication">Fabricación a Medida</h5>
-                        <p class="card-text" data-es="En proceso"
-                                            data-en="En proceso">
-                            En proceso
-                        </p>
+                        <h5 class="card-title" data-es="Instalación, Reparación y Servicios de Sistemas de Conducción de Gas para Soldadura"
+                                            data-en="Installation, Repair, and Services of Gas Conduction Systems for Welding">Instalación, Reparación y Servicios de Sistemas de Conducción de Gas para Soldadura</h5>
                     </div>
                 </div>
             </div>
 
-            <!-- More products can be duplicated easily -->
+            <!-- Example Product -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <img src="img/seguridad.png" class="card-img-top" alt="Equipo de seguridad">
+                    <div class="card-body">
+                        <h5 class="card-title" data-es="Equipo de seguridad"
+                                            data-en="Safety Equipment">Equipo de seguridad</h5>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Example Product -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <img src="img/humo.jpg" class="card-img-top" alt="humo">
+                    <div class="card-body">
+                        <h5 class="card-title" data-es="Refacciones para sistemas de extracción de humo de soldadura"
+                                            data-en="Spare parts for smoke extraction welding systems">Refacciones para sistemas de extracción de humo</h5>
         </div>
     </div>
 </section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-5 contact-sheet">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card p-4">
+                    <h3 class="mb-3" data-es="Contacto" data-en="Contact">Contacto</h3>
+                    <p class="mb-3" data-es="Contáctanos usando el formulario o por WhatsApp." data-en="Contact us using the form or via WhatsApp.">Contáctanos usando el formulario o por WhatsApp.</p>
+                    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="contact">
+                        <p class="d-none"><label>Don’t fill this out if you're human: <input name="bot-field"></label></p>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="name" data-es="Nombre" data-en="Name">Nombre</label>
+                            <input id="name" name="name" class="form-control" type="text"
+                                   data-es-placeholder="Tu nombre" data-en-placeholder="Your name"
+                                   placeholder="Tu nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email" data-es="Email" data-en="Email">Email</label>
+                            <input id="email" name="email" class="form-control" type="email"
+                                   data-es-placeholder="tu@correo.com" data-en-placeholder="you@youremail.com"
+                                   placeholder="tu@correo.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="message" data-es="Mensaje" data-en="Message">Mensaje</label>
+                            <textarea id="message" name="message" rows="4" class="form-control"
+                                   data-es-placeholder="Escribe tu mensaje..." data-en-placeholder="Write your message..."
+                                   placeholder="Escribe tu mensaje..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" data-es="Enviar" data-en="Send">Enviar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-4">
+                    <h4 data-es="Información" data-en="Information">Información</h4>
+                    <p class="mb-1"><strong>Tel:</strong> 8120025270</p>
+                    <p class="mb-1"><strong>Email:</strong> info@grince.com</p>
+                    <p class="mb-0">Monterrey, N.L., México</p>
+                    <hr>
+                    <!-- WhatsApp CTA removed -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Floating WhatsApp button removed -->
 
 <!-- FOOTER -->
 <footer class="py-3 bg-primary text-white text-center">
@@ -136,6 +261,11 @@ function setLanguage(lang) {
     document.querySelectorAll("[data-es]").forEach(el => {
         el.textContent = (lang === "es") ? el.getAttribute("data-es")
                                          : el.getAttribute("data-en");
+    });
+    // Swap image alt text for elements that provide both Spanish and English alt values
+    document.querySelectorAll("[data-es-alt]").forEach(el => {
+        el.alt = (lang === "es") ? el.getAttribute("data-es-alt")
+                                   : el.getAttribute("data-en-alt");
     });
 }
 </script>
