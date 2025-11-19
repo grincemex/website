@@ -38,15 +38,31 @@
             position: fixed; right: 20px; bottom: 20px; z-index:1100; text-decoration:none; padding:0; border:0;
             display:flex; align-items:center; justify-content:center;
         }
-        /* Simple version: just show the provided image */
-        .whatsapp-btn.simple { width:56px; height:56px; }
-        .whatsapp-btn.simple img { width:100%; height:100%; display:block; border-radius:50%; }
-        /* Legacy inner structure (kept for fallback) */
-        .whatsapp-inner { width:56px; height:56px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow: 0 6px 18px rgba(37,211,102,0.35); border:6px solid rgba(255,255,255,0.92); }
-        .whatsapp-btn svg { width:26px; height:26px; fill:#fff; display:block; }
-        .whatsapp-btn:focus { outline:none; box-shadow: 0 0 0 6px rgba(37,211,102,0.12); }
-        .whatsapp-btn:hover { transform: translateY(-2px) scale(1.02); }
-        @media (max-width:576px) { .whatsapp-btn { right:12px; bottom:12px; width:62px; height:62px; } .whatsapp-inner { width:48px; height:48px; border:5px solid rgba(255,255,255,0.92);} .whatsapp-btn svg { width:20px; height:20px; } }
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+        }
+
+        .whatsapp-float img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
         /* Hero caption background */
         .hero-caption { background: rgba(0,0,0,0.8); display: inline-block; padding: 1rem 1.25rem; border-radius: 4px; }
         @media (max-width:767px) { .hero-caption { display: block; width: 100%; box-sizing: border-box; padding: 0.75rem 1rem; } }
@@ -238,14 +254,34 @@
                     <p class="mb-1"><strong>Email:</strong> info@grince.com</p>
                     <p class="mb-0">Monterrey, N.L., México</p>
                     <hr>
-                    <!-- WhatsApp CTA removed -->
+                   <p>
+                        <a href="https://wa.me/528120025270?text=Hola%20GRINCE"
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         class="btn btn-success"
+                        style="background-color:#25D366; border:none; display:inline-flex; align-items:center; gap:8px;">
+      
+      <img src="img/whats.png" alt="WhatsApp" style="width:20px; height:20px;">
+      WhatsApp
+  </a>
+</p>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Floating WhatsApp button removed -->
+</section>
+<!-- Insert floating button here -->
+<a href="https://wa.me/528120025270?text=Hola%20GRINCE" class="whatsapp-float" target="_blank">
+    <img src="img/whats.png" alt="WhatsApp"
+         data-es-alt="WhatsApp"
+         data-en-alt="WhatsApp">
+</a>
+</body>
+</html>
+
 
 <!-- FOOTER -->
 <footer class="py-3 bg-primary text-white text-center">
